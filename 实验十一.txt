@@ -1,0 +1,460 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class Main implements ActionListener{
+	JFrame frame;
+	JButton btn1,btn2,btn3,btn4,btn5;
+    public static void main(String[] args) {
+        new Main().init();
+    }
+    void init() {
+    	frame=new JFrame("点击按钮后变为灰色");
+    	frame.setSize(500, 400);
+    	frame.setLocationRelativeTo(null);
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setVisible(true);
+    	frame.setLayout(new BorderLayout());
+    	btn1=new JButton("East");btn1.setBackground(Color.ORANGE);
+    	frame.add(btn1,BorderLayout.EAST);
+    	btn2=new JButton("West");btn2.setBackground(Color.GREEN);
+    	frame.add(btn2,BorderLayout.WEST);
+    	btn3=new JButton("North");btn3.setBackground(Color.YELLOW);
+    	frame.add(btn3,BorderLayout.NORTH);
+    	btn4=new JButton("South");btn4.setBackground(Color.CYAN);
+    	frame.add(btn4,BorderLayout.SOUTH);
+    	btn5=new JButton("Center");btn5.setBackground(Color.PINK);
+    	frame.add(btn5,BorderLayout.CENTER);
+    	btn1.addActionListener(this);
+    	btn2.addActionListener(this);
+    	btn3.addActionListener(this);
+    	btn4.addActionListener(this);
+    	btn5.addActionListener(this);
+    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("East"))
+			btn1.setBackground(Color.GRAY);
+		else if(e.getActionCommand().equals("West"))
+			btn2.setBackground(Color.GRAY);
+		else if(e.getActionCommand().equals("North"))
+			btn3.setBackground(Color.GRAY);
+		else if(e.getActionCommand().equals("South"))
+			btn4.setBackground(Color.GRAY);
+		else if(e.getActionCommand().equals("Center"))
+			btn5.setBackground(Color.GRAY);
+	}
+}
+
+
+
+
+
+
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+ 
+public class MyFrame implements ActionListener{
+    JFrame frame;
+    JTextField jf1,jf2;
+    JLabel jl1,jl2;
+    JButton btn1,btn2;
+    public static void main(String[] args) {
+        new MyFrame().init();
+    }
+    void init() {
+        frame=new JFrame("登录界面");
+        frame.setSize(400, 200);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+        Font font=new Font("宋体",Font.BOLD,20);
+        jf1=new JTextField(18);jf2=new JTextField(18);
+        jl1=new JLabel("用 户 名：");jl2=new JLabel("密    码：");
+        btn1=new JButton("确认");btn2=new JButton("清空");
+        jf1.setFont(font);jl1.setFont(font);btn1.setFont(font);
+        jf2.setFont(font);jl2.setFont(font);btn2.setFont(font);
+        frame.add(jl1);frame.add(jf1);
+        frame.add(jl2);frame.add(jf2);
+        frame.add(btn1);frame.add(btn2);
+        btn1.addActionListener(this);
+        btn2.addActionListener(this);
+         
+        frame.setVisible(true);
+    }
+    public void actionPerformed(ActionEvent e) {
+        User user=new User();
+        user.setSname(jf1.getText());
+        user.setSpassword(jf2.getText());
+        if(user.confirm()&&e.getActionCommand().equals("确认")) {
+            JFrame j=new JFrame("密码正确");
+            JTextField jf=new JTextField("欢迎"+jf1.getText()+"!");
+            jf.setFont(new Font("宋体",Font.BOLD,20));
+            j.setSize(300, 150);
+            j.setLocationRelativeTo(null);
+            j.add(jf);
+            j.setVisible(true);
+        }
+        else if(!user.confirm()&&e.getActionCommand().equals("确认")){
+        	JFrame j=new JFrame("密码错误");
+            JTextField jf=new JTextField("请您重新输入！");
+            jf.setFont(new Font("宋体",Font.BOLD,20));
+            j.setSize(300, 150);
+            j.setLocationRelativeTo(null);
+            j.add(jf);
+            j.setVisible(true);
+        }
+        else {
+        	jf1.setText("");jf2.setText("");
+        }
+    }
+}
+class User{
+    private String sname;
+    private String spassword;
+    public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	public String getSpassword() {
+		return spassword;
+	}
+	public void setSpassword(String spassword) {
+		this.spassword = spassword;
+	}
+	public boolean confirm() {
+        if(sname.equals("user1") && spassword.equals("111"))
+            return true;
+        else if(sname.equals("user2") && spassword.equals("222"))
+        	return true;
+        else if(sname.equals("user3") && spassword.equals("333"))
+        	return true;
+        else return false;
+    }
+}
+
+
+
+
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+ 
+public class MyFrame implements ActionListener{
+    JFrame frame;
+    JTextField jf1,jf2,jf3,jf4,jf5;
+    JLabel jl1,jl2,jl3,jl4,jl5;
+    JButton btn1,btn2,btn3,btn4;
+    public static void main(String[] args) {
+        new MyFrame().init();
+    }
+    void init() {
+        frame=new JFrame("复数计算器");
+        frame.setSize(500, 350);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+        Font font=new Font("宋体",Font.BOLD,20);
+        JPanel panel=new JPanel();
+        jf1=new JTextField(10);jf2=new JTextField(10);
+        jf3=new JTextField(10);jf4=new JTextField(10);
+        jl1=new JLabel("复数1：实部：");jl2=new JLabel("虚部：");
+        jl3=new JLabel("复数2：实部：");jl4=new JLabel("虚部：");
+        btn1=new JButton("+");btn2=new JButton("-");
+        btn3=new JButton("*");btn4=new JButton("/");
+        jf5=new JTextField(40);jl5=new JLabel("          运算结果：        ");
+        jf1.setFont(font);jl1.setFont(font);btn1.setFont(font);
+        jf2.setFont(font);jl2.setFont(font);btn2.setFont(font);
+        jf3.setFont(font);jl3.setFont(font);btn3.setFont(font);
+        jf4.setFont(font);jl4.setFont(font);btn4.setFont(font);
+        jf5.setFont(font);jl5.setFont(font);
+        frame.add(jl1);frame.add(jf1);
+        frame.add(jl2);frame.add(jf2);
+        frame.add(jl3);frame.add(jf3);
+        frame.add(jl4);frame.add(jf4);
+        frame.add(btn1);frame.add(btn2);
+        frame.add(btn3);frame.add(btn4);
+        frame.add(panel);frame.add(jl5);frame.add(jf5);
+        btn1.addActionListener(this);btn2.addActionListener(this);
+        btn3.addActionListener(this);btn4.addActionListener(this);
+        frame.setVisible(true);
+    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("+")) {
+			Complex c1=new Complex(Double.parseDouble(jf1.getText()),Double.parseDouble(jf2.getText()));
+			Complex c2=new Complex(Double.parseDouble(jf3.getText()),Double.parseDouble(jf4.getText()));
+			jf5.setText(c1.add(c2).print());
+		}
+		if(e.getActionCommand().equals("-")) {
+			Complex c1=new Complex(Double.parseDouble(jf1.getText()),Double.parseDouble(jf2.getText()));
+			Complex c2=new Complex(Double.parseDouble(jf3.getText()),Double.parseDouble(jf4.getText()));
+			jf5.setText(c1.sub(c2).print());
+		}
+		if(e.getActionCommand().equals("*")) {
+			Complex c1=new Complex(Double.parseDouble(jf1.getText()),Double.parseDouble(jf2.getText()));
+			Complex c2=new Complex(Double.parseDouble(jf3.getText()),Double.parseDouble(jf4.getText()));
+			jf5.setText(c1.mul(c2).print());
+		}
+		if(e.getActionCommand().equals("/")) {
+			Complex c1=new Complex(Double.parseDouble(jf1.getText()),Double.parseDouble(jf2.getText()));
+			Complex c2=new Complex(Double.parseDouble(jf3.getText()),Double.parseDouble(jf4.getText()));
+			if(c2.imaginary==0&&c2.real==0)
+				jf5.setText("The denominator cannot be 0.");
+			else jf5.setText(c1.div(c2).print());
+		}
+	}
+}
+class Complex{
+    double real;
+    double imaginary;
+    Complex(){}
+    Complex(double r,double i){
+        real=r;
+        imaginary=i;
+    }
+    Complex add(Complex c2){
+ 	   Complex c3 = new Complex();
+ 	   c3.real=real+c2.real;
+ 	   c3.imaginary=imaginary+c2.imaginary;
+ 	   return c3;
+    }
+    Complex sub(Complex c2){
+ 	   Complex c3 = new Complex();
+ 	   c3.real=real-c2.real;
+ 	   c3.imaginary=imaginary-c2.imaginary;
+ 	   return c3;
+    }
+    Complex mul(Complex c2){
+ 	   Complex c3 = new Complex();
+ 	   c3.real=real*c2.real-imaginary*c2.imaginary;
+ 	   c3.imaginary=imaginary*c2.real+real*c2.imaginary;
+ 	   return c3;
+    }
+    Complex div(Complex c2) {
+    	Complex c3 = new Complex();
+    	double fenmu=c2.real*c2.real+c2.imaginary*c2.imaginary;
+    	c3.real=(real*c2.real+imaginary*c2.imaginary)/fenmu;
+    	c3.imaginary=(imaginary*c2.real-real*c2.imaginary)/fenmu;
+    	return c3;
+    }
+    String print(){
+    	String answer = "";
+		String symbol="";
+		if(real!=0)symbol="+";
+		if(imaginary<0)symbol="";
+		if(real==0){
+			if(imaginary==0)
+				answer=answer+"0";
+		}
+		else {
+			if(canTransformToInt(real))
+				answer=answer+String.valueOf((int)real);
+			else 
+				answer=answer+String.format("%.2f",real);
+		}
+		if(imaginary!=0){			
+			if(imaginary==1)
+				answer=answer+symbol+"i";
+			else if(imaginary==-1)
+				answer=answer+"-i";
+			else if(canTransformToInt(imaginary))				
+				answer=answer+symbol+String.valueOf((int)imaginary)+"i";		
+			else answer=answer+symbol+String.format("%.2f",imaginary)+"i";
+		}
+		return answer;
+	}
+    boolean canTransformToInt(double x) {
+    	if(x-(int)x==0) return true;
+    	return false;
+    }
+}
+
+
+
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.*;
+ 
+public class MyFrame implements ActionListener,ItemListener{
+    JFrame frame;
+    JTextField jf1,jf2;
+    JTextArea ja;
+    JButton btn;
+    JCheckBox ckb1,ckb2,ckb3,ckb4,ckb5,ckb6;
+    JComboBox<String> cb1,cb2,cb3;
+    JRadioButton rb1,rb2,rb3,rb4,rb5,rb6;
+    JPanel panel1,panel2,panel3,panel4,panel5,panel6,panel7;
+    JLabel jl1,jl2,jl3,jl4,jl5,jl6,jl7,jl8,jl9,jl10;
+    Font font=new Font("宋体",Font.BOLD,20);
+    
+    public static void main(String[] args) {
+        new MyFrame().init();
+    }
+    void init() {
+        frame=new JFrame("个人信息收集");
+        frame.setSize(700, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+        
+        panel1=new JPanel();frame.add(panel1);
+        jl1=new JLabel("姓名：");jf1=new JTextField(15);
+        jl2=new JLabel("     性别：");
+        ButtonGroup gb1=new ButtonGroup();
+        rb1=new JRadioButton("男");rb2=new JRadioButton("女");
+        gb1.add(rb1);gb1.add(rb2);
+        jf1.setFont(font);jl1.setFont(font);jl2.setFont(font);rb1.setFont(font);rb2.setFont(font);
+        panel1.add(jl1);panel1.add(jf1);panel1.add(jl2);panel1.add(rb1);panel1.add(rb2);
+        
+        panel2=new JPanel();frame.add(panel2);
+        jl3=new JLabel("年龄：");
+        ButtonGroup gb2=new ButtonGroup();
+        rb3=new JRadioButton("18岁以下");rb4=new JRadioButton("18-35");
+        rb5=new JRadioButton("36-59");rb6=new JRadioButton("60岁以上");
+        gb2.add(rb3);gb2.add(rb4);gb2.add(rb5);gb2.add(rb6);
+        jl3.setFont(font);rb3.setFont(font);rb4.setFont(font);rb5.setFont(font);rb6.setFont(font);
+        panel2.add(jl3);panel2.add(rb3);panel2.add(rb4);panel2.add(rb5);panel2.add(rb6);
+        
+        panel3=new JPanel();frame.add(panel3);
+        jl4=new JLabel("地址：");jl5=new JLabel("省份：");jl6=new JLabel("市：");jl7=new JLabel("区/县：");
+        cb1=new JComboBox<String>();cb1.addItem("请选择省份");
+        cb1.addItem("安徽省");cb1.addItem("江苏省");cb1.addItem("浙江省");
+        cb2=new JComboBox<String>();cb3=new JComboBox<String>();
+        cb1.addItemListener(this);cb2.addItemListener(this);
+        jl4.setFont(font);jl5.setFont(font);jl6.setFont(font);jl7.setFont(font);
+        cb1.setFont(font);cb2.setFont(font);cb3.setFont(font);
+        panel3.add(jl4);panel3.add(jl5);panel3.add(cb1);
+        panel3.add(jl6);panel3.add(cb2);panel3.add(jl7);panel3.add(cb3);
+        
+        panel4=new JPanel();frame.add(panel4);
+        jl8=new JLabel("详细住址：");
+        jf2=new JTextField(30);
+        jl8.setFont(font);jf2.setFont(font);
+        panel4.add(jl8);panel4.add(jf2);
+        
+        panel5=new JPanel();frame.add(panel5);
+        jl9=new JLabel("爱好：");
+        ckb1=new JCheckBox("阅读");ckb2=new JCheckBox("唱歌");ckb3=new JCheckBox("玩游戏");
+        ckb4=new JCheckBox("rap");ckb5=new JCheckBox("跳舞");ckb6=new JCheckBox("篮球");
+        ckb1.setFont(font);ckb2.setFont(font);ckb3.setFont(font);
+        ckb4.setFont(font);ckb5.setFont(font);ckb6.setFont(font);jl9.setFont(font);
+        panel5.add(jl9);panel5.add(ckb1);panel5.add(ckb2);
+        panel5.add(ckb3);panel5.add(ckb4);panel5.add(ckb5);panel5.add(ckb6);
+        
+        panel6=new JPanel();frame.add(panel6);
+        jl10=new JLabel("曾获奖项：");
+        ja=new JTextArea(4,45);
+        ja.setFont(font);jl10.setFont(font);
+        panel6.add(jl10);panel6.add(ja);
+        
+        panel7=new JPanel();frame.add(panel7);
+        btn=new JButton("确认");
+        btn.setFont(font);panel7.add(btn);
+        btn.addActionListener(this);
+        
+        frame.setVisible(true);
+    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JFrame jf=new JFrame("用户信息");
+		JTextArea text=new JTextArea(10,40);
+		text.setFont(font);
+		text.append("姓名："+jf1.getText()+" ");
+		if(rb1.isSelected()) text.append("性别："+rb1.getText()+" ");
+		else if(rb2.isSelected()) text.append("性别："+rb2.getText()+" ");
+		if(rb3.isSelected()) text.append("年龄："+rb3.getText()+"\n");
+		else if(rb4.isSelected()) text.append("年龄："+rb4.getText()+"\n");
+		else if(rb5.isSelected()) text.append("年龄："+rb5.getText()+"\n");
+		else if(rb6.isSelected()) text.append("年龄："+rb6.getText()+"\n");
+		text.append("住址："+cb1.getSelectedItem()+cb2.getSelectedItem()+cb3.getSelectedItem()+"\n");
+		text.append("详细住址："+jf2.getText()+"\n");
+		text.append("爱好：");
+		if(ckb1.isSelected()) text.append(ckb1.getText()+" ");
+		if(ckb2.isSelected()) text.append(ckb2.getText()+" ");
+		if(ckb3.isSelected()) text.append(ckb3.getText()+" ");
+		if(ckb4.isSelected()) text.append(ckb4.getText()+" ");
+		if(ckb5.isSelected()) text.append(ckb5.getText()+" ");
+		if(ckb6.isSelected()) text.append(ckb6.getText()+" ");
+		text.append("\n");
+		text.append("曾获奖项："+ja.getText());
+		JOptionPane.showMessageDialog(jf,text,"用户信息",JOptionPane.INFORMATION_MESSAGE);
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getStateChange() ==ItemEvent.SELECTED){
+			if(e.getSource()==cb1) {
+				if(cb1.getSelectedItem().equals("安徽省")) {
+					cb2.removeAllItems();
+					cb2.addItem("合肥市");cb2.addItem("芜湖市");cb2.addItem("淮北市");
+				}
+				else if(cb1.getSelectedItem()=="江苏省") {
+					cb2.removeAllItems();
+					cb2.addItem("南京市");cb2.addItem("苏州市");cb2.addItem("徐州市");
+				}
+				else if(cb1.getSelectedItem()=="浙江省") {
+					cb2.removeAllItems();
+					cb2.addItem("杭州市");cb2.addItem("宁波市");cb2.addItem("绍兴市");
+				}
+			}
+			if(e.getSource()==cb2) {
+				if(cb2.getSelectedItem()=="合肥市") {
+					cb3.removeAllItems();
+					cb3.addItem("肥东县");cb3.addItem("肥西县");cb3.addItem("瑶海区");cb3.addItem("包河区");
+				}
+				if(cb2.getSelectedItem()=="芜湖市") {
+					cb3.removeAllItems();
+					cb3.addItem("镜湖区");cb3.addItem("鸠江区");cb3.addItem("弋江区");
+				}
+				if(cb2.getSelectedItem()=="淮北市") {
+					cb3.removeAllItems();
+					cb3.addItem("相山区");cb3.addItem("杜集市");cb3.addItem("濉溪县");
+				}
+				
+				if(cb2.getSelectedItem()=="南京市") {
+					cb3.removeAllItems();
+					cb3.addItem("玄武区");cb3.addItem("建邺区");cb3.addItem("鼓楼区");cb3.addItem("白下区");
+				}
+				if(cb2.getSelectedItem()=="苏州市") {
+					cb3.removeAllItems();
+					cb3.addItem("姑苏区");cb3.addItem("虎丘区");cb3.addItem("吴中区");
+				}
+				if(cb2.getSelectedItem()=="徐州市") {
+					cb3.removeAllItems();
+					cb3.addItem("睢宁县");cb3.addItem("沛县");cb3.addItem("睢宁县");
+				}
+				
+				if(cb2.getSelectedItem()=="杭州市") {
+					cb3.removeAllItems();
+					cb3.addItem("上城区");cb3.addItem("下城区");cb3.addItem("西湖区");cb3.addItem("江干区");
+				}
+				if(cb2.getSelectedItem()=="宁波市") {
+					cb3.removeAllItems();
+					cb3.addItem("镇海区");cb3.addItem("海曙区");cb3.addItem("江北区");
+				}
+				if(cb2.getSelectedItem()=="绍兴市") {
+					cb3.removeAllItems();
+					cb3.addItem("越城区");cb3.addItem("柯桥区");cb3.addItem("上虞区");
+				}
+			}
+		}
+	}
+}
